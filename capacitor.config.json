@@ -1,0 +1,8 @@
+{
+  "appId": "com.zzangii.sometorial",
+  "appName": "썸토리얼",
+  "webDir": "app",
+  "android": {
+    "backgroundColor": "#fbf6f3"
+  }
+}

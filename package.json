@@ -1,0 +1,14 @@
+{
+  "name": "some-torial",
+  "version": "1.0.0",
+  "private": true,
+  "description": "썸토리얼 — 소개팅 40분 실전 시뮬레이션",
+  "scripts": {
+    "serve": "npx --yes serve app"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/cli": "^6.2.0",
+    "@capacitor/core": "^6.2.0"
+  }
+}
