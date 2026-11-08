@@ -56,6 +56,17 @@
   const herAvatar = () => (typeof HER_PHOTO !== "undefined" && HER_PHOTO)
     ? `<img class="avatar her photo" src="${esc(HER_PHOTO)}" alt="지현">`
     : `<div class="avatar her">지</div>`;
+  // 프사 누르면 크게 보기 (카톡 프로필처럼)
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest(".avatar.photo");
+    if (!a) return;
+    e.stopPropagation();
+    const m = document.createElement("div");
+    m.className = "profile-modal";
+    m.innerHTML = `<div class="profile-card"><img src="${esc(HER_PHOTO.replace(".jpg", "-full.jpg"))}" alt="지현"><div class="profile-info"><b>지현</b><span>27 · 홍보팀 사보 담당</span></div></div>`;
+    m.addEventListener("click", () => m.remove());
+    document.body.appendChild(m);
+  }, true);
   (function applyHomeAvatar() {
     const el = document.querySelector(".cast .avatar.her");
     if (el && typeof HER_PHOTO !== "undefined" && HER_PHOTO) el.outerHTML = herAvatar();

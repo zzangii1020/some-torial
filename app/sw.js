@@ -2,7 +2,7 @@
 const CACHE = "sometorial-v1";
 const ASSETS = [
   "./", "index.html", "styles.css", "app.js", "data.js", "manifest.webmanifest",
-  "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "icons/apple-touch-icon.png"
+  "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "icons/apple-touch-icon.png", "img/jihyun.jpg", "img/jihyun-full.jpg"
 ];
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));

@@ -15,7 +15,7 @@
 const START_SCORE = 22;
 
 /* 지현 프로필 사진 — 사진 파일을 app/img/ 에 넣고 경로를 적으면 프사로 자동 적용 (비워두면 '지' 글자 아바타) */
-const HER_PHOTO = "";
+const HER_PHOTO = "img/jihyun.jpg";
 
 const STORY = [
   /* ───────────── 0~5분 ───────────── */
