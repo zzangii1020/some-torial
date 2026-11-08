@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>썸토리얼</title>
+  <meta name="description" content="소개팅 40분 실전 시뮬레이션 — 상대가 흘린 것을 놓치지 않는 연습">
+  <meta name="theme-color" content="#e0567a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="썸토리얼">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- 홈 -->
+  <section id="home" class="screen active">
+    <div class="home-wrap">
+      <div class="brand">
+        <img src="icons/icon-192.png" alt="" class="brand-icon">
+        <h1>썸토리얼</h1>
+        <p class="tagline">소개팅 40분 실전 시뮬레이션</p>
+      </div>
+
+      <blockquote class="motto">매력적인 사람은 말을 많이 하는 사람이 아니라,<br><b>상대가 흘린 것을 놓치지 않는 사람이다.</b></blockquote>
+
+      <div class="cast">
+        <div class="cast-card">
+          <div class="avatar me">정</div>
+          <div><b>정우 (28) · 나</b><span>IT 서비스 기획자. 긴장하면 머리가 하얘지지만, 상대의 말을 흘려듣지 않는다.</span></div>
+        </div>
+        <div class="cast-card">
+          <div class="avatar her">지</div>
+          <div><b>지현 (27)</b><span>홍보팀, 사보 인터뷰 담당. 예의 바르지만 방어적. 오늘도 큰 기대는 없다.</span></div>
+        </div>
+        <p class="setting">토요일 저녁 6시 · 강남역 이탈리안 식당 · 시작 호감도 <b>22</b></p>
+      </div>
+
+      <div class="mode-pick">
+        <button class="btn primary big" data-start="learn">
+          <span class="btn-title">학습 모드로 시작</span>
+          <span class="btn-sub">힌트 · 선택마다 코치 해설</span>
+        </button>
+        <button class="btn outline big" data-start="real">
+          <span class="btn-title">실전 모드 ⏱</span>
+          <span class="btn-sub">12초 제한 · 힌트 없음 · 선택지 섞임</span>
+        </button>
+      </div>
+      <p id="bestScore" class="best" hidden></p>
+      <button id="resumeBtn" class="btn ghost" hidden>이어하기</button>
+
+      <div class="menu-grid">
+        <button class="menu-item" data-go="drill"><span class="mi-emoji">⚡</span><b>순발력 훈련</b><span>한 마디에 바로 받기</span></button>
+        <button class="menu-item" data-go="patterns"><span class="mi-emoji">📌</span><b>대화 패턴 20</b><span>상황극에서 배운 것</span></button>
+        <button class="menu-item" data-go="methods"><span class="mi-emoji">🧠</span><b>말문 막힐 때 사고법</b><span>실전 비상 카드 10</span></button>
+        <button class="menu-item" data-go="cheat"><span class="mi-emoji">📝</span><b>소개팅 전 암기</b><span>딱 6줄만</span></button>
+      </div>
+
+      <button id="installBtn" class="btn ghost install" hidden>📲 홈 화면에 앱 설치</button>
+      <a id="apkLink" class="btn ghost install apk" href="https://github.com/zzangii1020/some-torial/releases/latest/download/sometorial.apk" hidden>🤖 안드로이드 앱(APK) 다운로드</a>
+      <p id="iosHint" class="ios-hint" hidden>iPhone: Safari 하단 <b>공유</b> 버튼 → <b>홈 화면에 추가</b>를 누르면 앱으로 설치돼요.</p>
+    </div>
+  </section>
+
+  <!-- 시뮬레이션 -->
+  <section id="game" class="screen">
+    <header class="game-top">
+      <button class="icon-btn" id="gameBack" aria-label="홈으로">‹</button>
+      <div class="meter">
+        <div class="meter-row">
+          <span class="meter-label">💗 호감도</span>
+          <span class="meter-num" id="scoreNum">22</span>
+          <span class="meter-delta" id="scoreDelta"></span>
+        </div>
+        <div class="meter-bar"><div class="meter-fill" id="scoreFill"></div></div>
+      </div>
+      <span class="clock" id="clock">18:02</span>
+      <button class="icon-btn small" id="autoBtn" aria-label="자동 진행" title="자동 진행">▶</button>
+    </header>
+    <div class="chapter-bar" id="chapterBar"></div>
+    <main class="chat" id="chat" aria-live="polite"></main>
+    <div class="tapbar" id="tapbar">탭해서 계속 ▾</div>
+    <div class="sheet" id="sheet" hidden>
+      <div class="timer" id="timer" hidden><div class="timer-fill" id="timerFill"></div></div>
+      <p class="sheet-prompt" id="sheetPrompt"></p>
+      <button class="hint-btn" id="hintBtn">💭 남자의 머릿속 보기</button>
+      <p class="hint" id="hintText" hidden></p>
+      <div class="options" id="options"></div>
+    </div>
+  </section>
+
+  <!-- 결과 -->
+  <section id="result" class="screen">
+    <div class="page">
+      <div class="ending" id="ending"></div>
+      <h2 class="sec-title">선택 리포트</h2>
+      <div id="report"></div>
+      <div class="row-btns">
+        <button class="btn primary" id="retryBtn">다시 해보기</button>
+        <button class="btn outline" data-go="home">홈으로</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 순발력 훈련 -->
+  <section id="drill" class="screen">
+    <header class="page-top"><button class="icon-btn" data-go="home" aria-label="홈으로">‹</button><h2>⚡ 순발력 훈련</h2><span class="drill-count" id="drillCount"></span></header>
+    <div class="page" id="drillBody"></div>
+  </section>
+
+  <!-- 패턴 -->
+  <section id="patterns" class="screen">
+    <header class="page-top"><button class="icon-btn" data-go="home" aria-label="홈으로">‹</button><h2>📌 대화 패턴 20</h2></header>
+    <div class="page" id="patternList"></div>
+  </section>
+
+  <!-- 사고법 -->
+  <section id="methods" class="screen">
+    <header class="page-top"><button class="icon-btn" data-go="home" aria-label="홈으로">‹</button><h2>🧠 말문 막힐 때 사고법</h2></header>
+    <div class="page" id="methodList"></div>
+  </section>
+
+  <!-- 암기 -->
+  <section id="cheat" class="screen">
+    <header class="page-top"><button class="icon-btn" data-go="home" aria-label="홈으로">‹</button><h2>📝 소개팅 전 이것만</h2></header>
+    <div class="page">
+      <ol class="cheat-list">
+        <li>화제는 <b>만드는 게 아니라 눈으로 찾는 것</b></li>
+        <li>상대의 마지막 문장에서 <b>명사 하나만</b> 물기</li>
+        <li>질문 두 번 연속하면 → <b>다음은 무조건 내 이야기</b></li>
+        <li>말문 막히면 → <b>"그래서 ○○하신 거구나"</b></li>
+        <li>침묵 오면 → <b>사물 → 아까 얘기 → 침묵 인정</b> 순서</li>
+        <li>마지막엔 → <b>오늘 나온 소재로 다음 약속</b></li>
+      </ol>
+      <blockquote class="motto">매력적인 사람은 말을 많이 하는 사람이 아니라,<br><b>상대가 흘린 것을 놓치지 않는 사람이다.</b></blockquote>
+    </div>
+  </section>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
