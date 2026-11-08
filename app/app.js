@@ -52,6 +52,15 @@
 
   const chat = $("#chat");
 
+  /* 지현 프사 */
+  const herAvatar = () => (typeof HER_PHOTO !== "undefined" && HER_PHOTO)
+    ? `<img class="avatar her photo" src="${esc(HER_PHOTO)}" alt="지현">`
+    : `<div class="avatar her">지</div>`;
+  (function applyHomeAvatar() {
+    const el = document.querySelector(".cast .avatar.her");
+    if (el && typeof HER_PHOTO !== "undefined" && HER_PHOTO) el.outerHTML = herAvatar();
+  })();
+
   function newState(mode) {
     return { mode, i: 0, score: START_SCORE, picks: {}, log: [], transcript: [], clock: "18:02", chapter: "" };
   }
@@ -156,7 +165,7 @@
         el = h(`<div class="narr">${esc(st.text)}</div>`);
         break;
       case "j":
-        el = h(`<div><div class="who">지현</div><div class="msg her"><div class="avatar her">지</div><div class="bubble">${esc(st.text)}</div></div></div>`);
+        el = h(`<div><div class="who">지현</div><div class="msg her">${herAvatar()}<div class="bubble">${esc(st.text)}</div></div></div>`);
         break;
       case "s":
         el = h(`<div><div class="who staff">직원</div><div class="msg staff"><div class="avatar" style="background:var(--surface-2)">🍝</div><div class="bubble">${esc(st.text)}</div></div></div>`);
