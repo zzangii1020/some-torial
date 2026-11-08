@@ -1,14 +1,13 @@
 name: Deploy web app (GitHub Pages)
 
+# main에 푸시하면 app/ 폴더를 gh-pages 브랜치로 배포 → https://zzangii1020.github.io/some-torial/
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
@@ -16,17 +15,14 @@ concurrency:
 
 jobs:
   deploy:
-    # GitHub Pages는 무료 플랜에서 공개 저장소만 지원 — 비공개면 건너뜀
-    if: ${{ !github.event.repository.private }}
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - name: Bump service worker cache version
+        run: sed -i "s/sometorial-v1/sometorial-${{ github.run_number }}/" app/sw.js
+      - uses: peaceiris/actions-gh-pages@v4
         with:
-          path: app
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./app
+          publish_branch: gh-pages
+          force_orphan: true
